@@ -57,7 +57,6 @@ namespace CompilePalX
             UpdateManager.OnUpdateFound += UpdateManager_OnUpdateFound;
             UpdateManager.CheckVersion();
 
-            AnalyticsManager.Launch();
             PersistenceManager.Init();
             ErrorFinder.Init();
 
@@ -141,7 +140,7 @@ namespace CompilePalX
 
                 errorLink.Inlines.Add(text);
                 errorLink.TargetName = e.ID.ToString();
-                errorLink.Click += errorLink_Click;
+                errorLink.Click += ErrorLink_Click;
 
                 var underline = new TextDecoration
                 {
@@ -158,7 +157,7 @@ namespace CompilePalX
             });
         }
 
-        static void errorLink_Click(object sender, System.Windows.RoutedEventArgs e)
+        static void ErrorLink_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var link = (Hyperlink)sender;
             int errorCode = int.Parse(link.TargetName);
@@ -335,8 +334,6 @@ namespace CompilePalX
 					}
 	            }
 
-                AnalyticsManager.ModifyPreset();
-
                 UpdateParameterTextBox();
             }
         }
@@ -370,8 +367,6 @@ namespace CompilePalX
                 }
             }
 
-            AnalyticsManager.ModifyPreset();
-
             UpdateParameterTextBox();
             UpdateProcessList();
 
@@ -402,8 +397,6 @@ namespace CompilePalX
 
                 ConfigurationManager.NewPreset(presetName);
 
-                AnalyticsManager.NewPreset();
-
                 SetSources();
                 CompileProcessesListBox.SelectedIndex = 0;
                 PresetConfigListBox.SelectedItem = presetName;
@@ -421,8 +414,6 @@ namespace CompilePalX
                     string presetName = dialog.Text;
 
                     ConfigurationManager.ClonePreset(presetName);
-
-                    AnalyticsManager.NewPreset();
 
                     SetSources();
                     CompileProcessesListBox.SelectedIndex = 0;

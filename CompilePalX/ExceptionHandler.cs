@@ -20,10 +20,6 @@ namespace CompilePalX
             if (e.InnerException != null)
                 CompilePalLogger.LogLine(e.InnerException.ToString());
 
-            try {
-                AnalyticsManager.Error();//risky, but /interesting/
-            } catch (Exception) {}
-
             if (crash)
             {
                 string crashLogName = DateTime.Now.ToString("s").Replace(":", "-");

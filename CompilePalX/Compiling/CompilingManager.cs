@@ -74,7 +74,6 @@ namespace CompilePalX
             // Tells windows to not go to sleep during compile
             NativeMethods.SetThreadExecutionState(NativeMethods.ES_CONTINUOUS | NativeMethods.ES_SYSTEM_REQUIRED);
 
-            AnalyticsManager.Compile();
 
             IsCompiling = true;
 
@@ -128,12 +127,12 @@ namespace CompilePalX
                     mapErrors.Add(new MapErrors { MapName = cleanMapName, Errors = compileErrors });
                 }
 
-                MainWindow.ActiveDispatcher.Invoke(() => postCompile(mapErrors));
+                MainWindow.ActiveDispatcher.Invoke(() => PostCompile(mapErrors));
             }
             catch (ThreadAbortException) { ProgressManager.ErrorProgress(); }
         }
 
-        private static void postCompile(List<MapErrors> errors)
+        private static void PostCompile(List<MapErrors> errors)
         {
             CompilePalLogger.LogLineColor(string.Format("'{0}' compile finished in {1}", ConfigurationManager.CurrentPreset, compileTimeStopwatch.Elapsed.ToString(@"hh\:mm\:ss")), Brushes.ForestGreen);
 
@@ -166,9 +165,6 @@ namespace CompilePalX
                         CompilePalLogger.Log("    ● ");
                         CompilePalLogger.LogCompileError(errorText, error);
                         CompilePalLogger.LogLine();
-
-                        if (error.Severity >= 3)
-                            AnalyticsManager.CompileError();
                     }
                 }
             }
@@ -211,7 +207,7 @@ namespace CompilePalX
 
             CompilePalLogger.LogLineColor("Compile forcefully ended.", Brushes.OrangeRed);
 
-            postCompile(null);
+            PostCompile(null);
         }
 
         class MapErrors
