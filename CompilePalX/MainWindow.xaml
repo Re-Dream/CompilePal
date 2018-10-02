@@ -7,8 +7,8 @@
         xmlns:config="clr-namespace:CompilePalX.Configuration"
 
         Title="Compile Pal X"
-                      MinHeight="550" MinWidth="790"
-                      Height="550" Width="790"
+                      MinHeight="600" MinWidth="800"
+                      Height="600" Width="800"
                       Closing="MetroWindow_Closing"
                       IconEdgeMode="Aliased" Icon="CompilePalIcon.ico" ShowIconOnTitleBar="False" 
                       Activated="MetroWindow_Activated" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" >
